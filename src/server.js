@@ -1,5 +1,4 @@
 'use strict'
-require('dotenv').config()
 const petsRouter = require('./routes/pets.route')
 const vehicleRouter = require('./routes/vehicle.route')
 const express = require('express')
