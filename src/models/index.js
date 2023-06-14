@@ -1,5 +1,5 @@
 'use strict'
-// require('dotenv').config()
+require('dotenv').config()
 const pets = require('./pets')
 const vehicles = require('./vehicle')
 const { Sequelize, DataTypes } = require('sequelize')
