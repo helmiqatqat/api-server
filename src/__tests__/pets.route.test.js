@@ -37,7 +37,6 @@ describe('testing pets routes', () => {
   });
 });
 
-
 afterAll(async () => {
   await db.drop();
 });
