@@ -1,38 +1,39 @@
 'use strict'
 const express = require('express')
 const vehicleRouter = express.Router()
-const { vehicles } = require('../models/index')
+const { vehiclesModel } = require('../models/index')
 vehicleRouter.use(express.json())
 
-vehicleRouter.get('/all-vehicles', getAllvehicles);
-vehicleRouter.get('/vehicle/:id', getvehicle);
-vehicleRouter.post('/new-vehicle', addvehicle);
-vehicleRouter.put('/update-vehicle/:id', updatevehicle);
-vehicleRouter.delete('/remove-vehicle/:id', deletevehicle)
+vehicleRouter.get('/all-vehicles', getAllVehicles);
+vehicleRouter.get('/vehicle/:id', getVehicle);
+vehicleRouter.post('/new-vehicle', addVehicle);
+vehicleRouter.put('/update-vehicle/:id', updateVehicle);
+vehicleRouter.delete('/remove-vehicle/:id', deleteVehicle)
 
-async function getAllvehicles (req, res) {
-  const result = await vehicles.findAll()
+async function getAllVehicles (req, res) {
+  const result = await vehiclesModel.read()
   res.status(200).json(result)
 }
-async function getvehicle (req, res) {
+async function getVehicle (req, res) {
   const vehicleID = req.params.id
-  const result = await vehicles.findOne({where: {id: vehicleID}})
+  const result = await vehiclesModel.read(vehicleID)
   res.status(200).json(result)
 }
-async function addvehicle (req, res) {
+async function addVehicle (req, res) {
   const body = req.body
-  const result = await vehicles.create(body)
+  const result = await vehiclesModel.add(body)
   res.status(201).json(result)
 }
-async function updatevehicle (req, res) {
+async function updateVehicle (req, res) {
   const vehicleID = req.params.id
   const body = req.body
-  const result = await vehicles.update(body, {where: {id: vehicleID}},)
+  const result = await vehiclesModel.update(body, vehicleID)
   res.status(201).json(result)
 }
-async function deletevehicle (req, res) {
+async function deleteVehicle (req, res) {
   const vehicleID = req.params.id
-  const result = await vehicles.destroy({where: {id: vehicleID}})
+  const result = await vehiclesModel.delete(vehicleID)
   res.status(204).json(result)
 }
+
 module.exports = vehicleRouter
