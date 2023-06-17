@@ -9,6 +9,9 @@ const vehicles = (sequelize, DataTypes) => {
       },
       year: {
         type: DataTypes.INTEGER,
+      },
+      ownerID: {
+        type: DataTypes.INTEGER,
       }
     })
   )
